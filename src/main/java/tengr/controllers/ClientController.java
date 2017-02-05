@@ -23,11 +23,12 @@ public class ClientController {
   /**
    * /create  --> Create a new client and save it in the database.
    * 
-   * @param type Client's type
    * @param name Client's name
+   * @param status Client's status
+   * @param type Client's type
    * @return A string describing if the client is succesfully created or not.
    */
-  @RequestMapping("/create")
+  @RequestMapping("/createClient")
   @ResponseBody
   public String create(String name, String status, String type) {
     Client client = null;
@@ -47,7 +48,7 @@ public class ClientController {
    * @param id The id of the client to delete
    * @return A string describing if the client is succesfully deleted or not.
    */
-  @RequestMapping("/delete")
+  @RequestMapping("/deleteClient")
   @ResponseBody
   public String delete(long id) {
     try {
@@ -61,12 +62,12 @@ public class ClientController {
   }
   
   /**
-   * /get-by-name  --> Return the id for the client having the passed name.
+   * /get-client-by-name  --> Return the id for the client having the passed name.
    * 
    * @param name The name to search in the database.
    * @return The client id or a message error if the client is not found.
    */
-  @RequestMapping("/get-by-name")
+  @RequestMapping("/get-client-by-name")
   @ResponseBody
   public String getByName(String name) {
     String clientId;
@@ -90,7 +91,7 @@ public class ClientController {
    * @param type The new type.
    * @return A string describing if the client is succesfully updated or not.
    */
-  @RequestMapping("/update")
+  @RequestMapping("/updateClient")
   @ResponseBody
   public String updateClient(long id, String name, String status, String type) {
     try {
