@@ -11,7 +11,7 @@ public class MainController {
   @ResponseBody
   public String index() {
     return "Proudly handcrafted by " +
-        "<a href='http://netgloo.com/en'>Netgloo</a> :)";
+        "<a href='https://google.com'>Google</a> :)";
   }
 
 }

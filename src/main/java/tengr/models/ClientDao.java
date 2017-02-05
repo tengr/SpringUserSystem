@@ -5,7 +5,7 @@ import javax.transaction.Transactional;
 import org.springframework.data.repository.CrudRepository;
 
 /**
- * A DAO for the entity User is simply created by extending the CrudRepository
+ * A DAO for the entity Client is simply created by extending the CrudRepository
  * interface provided by spring. The following methods are some of the ones
  * available from such interface: save, delete, deleteAll, findOne and findAll.
  * The magic is that such methods must not be implemented, and moreover it is
@@ -14,13 +14,13 @@ import org.springframework.data.repository.CrudRepository;
  * @author tengr
  */
 @Transactional
-public interface UserDao extends CrudRepository<User, Long> {
+public interface ClientDao extends CrudRepository<Client, Long> {
 
   /**
-   * Return the user having the passed email or null if no user is found.
+   * Return the user having the passed name or null if no user is found.
    * 
-   * @param email the user email.
+   * @param name the user name.
    */
-  public User findByEmail(String email);
+  public Client findByName(String name);
 
-} // class UserDao
+} // class ClientDao
