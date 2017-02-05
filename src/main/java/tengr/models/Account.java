@@ -1,5 +1,6 @@
 package tengr.models;
 
+import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -38,6 +39,11 @@ public class Account {
   // The account's status
   @NotNull
   private String status;
+
+  @ManyToOne
+  @JoinColumn(name = "account_client_id")
+  private Client client;
+
   
 
   // ------------------------
@@ -87,6 +93,10 @@ public class Account {
   
   public void setStatus(String value) {
     this.status = value;
+  }
+
+  public Client getClient() {
+      return client;
   }
 
   

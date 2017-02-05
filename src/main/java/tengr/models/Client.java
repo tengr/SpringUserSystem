@@ -1,11 +1,13 @@
 package tengr.models;
 
+import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 /**
  * An entity Client composed by three fields (id, name, status, type).
@@ -38,6 +40,10 @@ public class Client {
   // The client's name
   @NotNull
   private String type;
+
+
+  @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+  private Set<Account> accounts;
 
   // ------------------------
   // PUBLIC METHODS
@@ -87,7 +93,26 @@ public class Client {
   public void setType(String value) {
     this.type = value;
   }
-  
+
+  public Set<Account> getAccounts(){
+    return accounts;
+  }
+
+  @Override
+    public String toString() {
+        String result = String.format(
+                "Client[id=%d, login='%s']%n",
+                id, name);
+        if (accounts != null) {
+            for(Account account : accounts) {
+                result += String.format(
+                        "Account[id=%d, login='%s']%n",
+                        account.getId(), account.getLogin());
+            }
+        }
+
+        return result;
+    }
   
   
 } // class Client
