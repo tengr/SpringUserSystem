@@ -13,7 +13,6 @@
 - MYSQL
 
 ## Run
-```create a mySQL database called "piexchange"```  
-```the database should be at localhost:3306/piexchange```  
+```create a mySQL database called "piexchange", the database should be at localhost:3306/piexchange```  
 ```mvn clean spring-boot:run```  
 ```go to http://localhost:8080/```  
