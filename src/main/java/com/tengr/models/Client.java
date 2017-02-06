@@ -4,14 +4,13 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "role")
-public class Role {
-    @Override
-    public String toString() {return this.getName() + " ";}
-
+@Table(name = "client")
+public class Client {
     private Long id;
     private String name;
-    private Set<User> users;
+
+
+    private Set<User> clientUsers;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,7 +21,6 @@ public class Role {
     public void setId(Long id) {
         this.id = id;
     }
-
     public String getName() {
         return name;
     }
@@ -30,13 +28,11 @@ public class Role {
     public void setName(String name) {
         this.name = name;
     }
-
-    @ManyToMany(mappedBy = "roles")
-    public Set<User> getUsers() {
-        return users;
+    @OneToMany(mappedBy = "userClient", cascade = CascadeType.ALL)
+    public Set<User> getClientUsers() {
+        return clientUsers;
     }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
+    public void setClientUsers(Set<User> clientUsers) {
+        this.clientUsers = clientUsers;
     }
 }

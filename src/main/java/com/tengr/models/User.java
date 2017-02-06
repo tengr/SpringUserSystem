@@ -7,10 +7,13 @@ import java.util.Set;
 @Table(name = "user")
 public class User {
     private Long id;
-    private String username;
+    private String username; //login
     private String password;
     private String passwordConfirm;
+    private String status;
     private Set<Role> roles;
+
+    private Client userClient;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -37,6 +40,36 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    @ManyToMany
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    public Set<Role> getRoles() {
+        return roles;
+    }
+    @ManyToOne
+    @JoinColumn(name = "user_client_id")
+    public Client getUserClient() {
+        return userClient;
+    }
+    public void setUserClient(Client userClient) {
+        this.userClient = userClient;
+    }
+
+    //userType is aggregate of roles
+    public String userType() {
+        String type = "";
+        for(Role role : roles) {
+            type += role.toString();
+        }
+        return type;
+    }
 
     @Transient
     public String getPasswordConfirm() {
@@ -45,12 +78,6 @@ public class User {
 
     public void setPasswordConfirm(String passwordConfirm) {
         this.passwordConfirm = passwordConfirm;
-    }
-
-    @ManyToMany
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    public Set<Role> getRoles() {
-        return roles;
     }
 
     public void setRoles(Set<Role> roles) {
